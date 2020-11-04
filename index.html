@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>19:50:43</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			body {
+				background-color: black;
+			}
+			#date {
+				font-size: 20em;
+				font-size: 10vw;
+				color: #FFF;
+				text-align: center;
+				text-shadow: 3px 3px #6C6C6C;
+				position: fixed;
+				top: 25%;
+				bottom: 25%;
+				left: 25%;
+				right: 25%;
+			}
+			#pixel {
+				position: fixed;
+				display: none;
+				width: 1px;
+				height: 1px;
+				bottom: 23px;
+				right: 42px;
+				background-color: lime;
+			}
+			#switch {
+				position: fixed;
+				top: 5px;
+				right: 5px;
+				color: #eee;
+				font-size: 1.5em;
+				cursor: pointer;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!-- Start: 28.04.2016 1:42 -->
+		<div id="switch" onclick="startUpdate()">pause</div>
+		<div id="date">Hi!</div>
+		<div id="pixel"></div>
+		<!--
+		<script>
+			x = Math.floor(Math.random() * (window.innerWidth - 23)) + 23;
+			y = Math.floor(Math.random() * (window.innerHeight - 23)) + 23;
+			document.getElementById("pixel").style.top = y + "px";
+			document.getElementById("pixel").style.left = x + "px";
+		</script>
+		-->
+		<script>
+			var updating = false;
+			var updatingID = 0;
+			
+			function setDate(){
+				var date = new Date(); 
+				
+				document.getElementById("date").innerHTML = date.toLocaleDateString() + "<br>" + date.toLocaleTimeString();
+				document.title = date.toLocaleTimeString();
+			}
+			
+			function startUpdate(){	
+				if (!updating) {
+					updatingID = window.setInterval(function() { setDate();}, 1000);
+					updating = true;
+					document.getElementById("switch").innerHTML = "&#x2610;";
+				} else {
+					window.clearInterval(updatingID);
+					updating = false;
+					document.getElementById("switch").innerHTML = "&#x25b7;";
+				}
+			}
+			startUpdate();
+		</script>
+	</body>
+</html>
